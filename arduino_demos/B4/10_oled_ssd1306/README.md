@@ -2,8 +2,8 @@
 
 ## Description
 This example demonstrates how to display text on the onboard SSD1306 128x64 OLED display using the U8g2 library. It shows two lines:
-- **"HUBORIN"** in a larger font.
-- **"www.huborin.com"** in a smaller font.
+- **"FeedCurrent"** in a larger font.
+- **"www.feedcurrent.com"** in a smaller font.
 The display is connected via I2C (software I2C implementation).
 
 ## File Structure
@@ -27,8 +27,8 @@ The display is connected via I2C (software I2C implementation).
 
 ## Expected Behavior
 After flashing, the OLED display will show:
-- **HUBORIN** near the top of the screen.
-- **www.huborin.com** below it.
+- **FeedCurrent** near the top of the screen.
+- **www.feedcurrent.com** below it.
 The display content is static and continuously refreshed in the `loop()`.
 
 ## Important Notes

@@ -4,11 +4,11 @@
 This example demonstrates basic SD card operations: mount, read/write/append/delete files, and performance test.
 
 ## File Structure
-- `src/B8_06_sd_card.ino` – Arduino source code.
-- `precompiled/B8_06_sd_card.bin` – Precompiled binary.
+- `src/B8_06_sd_card_operations.ino` – Arduino source code.
+- `precompiled/B8_06_sd_card_operations.bin` – Precompiled binary.
 
 ## Using the Precompiled Binary
-- Flash `precompiled/B8_06_sd_card.bin` to `0x0`.
+- Flash `precompiled/B8_06_sd_card_operations.bin` to `0x0`.
 
 ## Compiling from Source
 - **Dependencies**: `FS.h`, `SD.h`, `SPI.h` (built-in).

@@ -4,11 +4,11 @@
 This example reads the 8 digital inputs (P0-P7) on the PCF8575 expander and prints their states to the Serial Monitor as a binary number.
 
 ## File Structure
-- `src/B8_02_read_digital_input.ino` – Arduino source code.
-- `precompiled/B8_02_read_digital_input.bin` – Precompiled firmware binary.
+- `src/B8_02_read_digital_inputs.ino` – Arduino source code.
+- `precompiled/B8_02_read_digital_inputs.bin` – Precompiled firmware binary.
 
 ## Using the Precompiled Binary
-- Flash `precompiled/B8_02_read_digital_input.bin` to address `0x0`.
+- Flash `precompiled/B8_02_read_digital_inputs.bin` to address `0x0`.
 
 ## Compiling from Source
 - **Dependencies**: `PCF8575` library (same as example 01).
