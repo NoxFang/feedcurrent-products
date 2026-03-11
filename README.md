@@ -9,7 +9,7 @@ This repository provides software resources for IoT controllers, including:
 ## Repository Structure
 
 - `pin_definitions/` - ESP32 I/O pin definitions for each product
-  - `B4M_pin_definition.md`
+  - `pin_definitions/B4M/` - B4M model
 
 - `esphome_configs/` - ESPHome YAML configuration files for Home Assistant
   - `B4M_esphome_with_tuya.yaml`
@@ -31,7 +31,7 @@ This repository provides software resources for IoT controllers, including:
 
 - Clone the repository:
   git clone https://github.com/NoxFang/kincony-products.git
-- Navigate to the folder of your product (e.g., arduino_demos/KC_B4M/).
+- Navigate to the folder of your product (e.g., arduino_demos/B4M/).
 - Read the README.md inside each demo or config folder for specific instructions.
 
 ## Contributing
