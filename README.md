@@ -30,7 +30,7 @@ This repository provides software resources for IoT controllers, including:
 ## How to Use
 
 - Clone the repository:
-  git clone https://github.com/NoxFang/kincony-products.git
+  git clone https://github.com/NoxFang/feedcurrent-products.git
 - Navigate to the folder of your product (e.g., arduino_demos/B4M/).
 - Read the README.md inside each demo or config folder for specific instructions.
 
