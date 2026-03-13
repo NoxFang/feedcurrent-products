@@ -1,4 +1,4 @@
-# Kincony B16 Arduino Example 01: Turn ON/OFF OUTPUT
+# FeedCurrent B16 Controller Arduino Example 01: Turn ON/OFF OUTPUT
 
 ## Description
 This example demonstrates how to control the 16 relay outputs on the B16 board via the **PCF8575 output chip** (address `0x22`). It sequentially turns on each output (pins 0-15) and then turns them off in a loop.

@@ -1,5 +1,5 @@
 /*
-* Made by KinCony IoT: https://www.kincony.com
+* Made by FeedCurrent IoT: https://www.feedcurrent.com
 *
 * This Arduino program sets up an ESP32-S3 with a W5500 Ethernet module
 * as a TCP server. It listens on port 4196 and echoes back any string
