@@ -1,0 +1,652 @@
+esphome:
+  name: b32m
+  friendly_name: B32M Controller
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+# Ethernet Configuration (W5500)
+ethernet:
+  type: W5500
+  clk_pin: GPIO1
+  mosi_pin: GPIO2
+  miso_pin: GPIO41
+  cs_pin: GPIO42
+  interrupt_pin: GPIO43
+  reset_pin: GPIO44
+  manual_ip:
+    static_ip: 192.168.1.100
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+
+# I2C Bus Configuration
+i2c:
+  - id: bus_a
+    sda: GPIO8
+    scl: GPIO18
+    scan: true
+    frequency: 400kHz
+
+# PCF8575 I/O Expanders
+pcf8574:
+  # Input 1-16
+  - id: 'pcf8574_hub_in_1'
+    i2c_id: bus_a
+    address: 0x22
+    pcf8575: true
+  # Input 17-24 & Output 1-8
+  - id: 'pcf8574_hub_in_out_1'
+    i2c_id: bus_a
+    address: 0x25
+    pcf8575: true
+  # Output 9-24
+  - id: 'pcf8574_hub_out_1'
+    i2c_id: bus_a
+    address: 0x24
+    pcf8575: true
+  # Input 25-32 & Output 25-32
+  - id: 'pcf8574_hub_in_out_2'
+    i2c_id: bus_a
+    address: 0x26
+    pcf8575: true
+
+# 32 Binary Sensors (Inputs)
+binary_sensor:
+  # Inputs 1-16 (0x22)
+  - platform: gpio
+    name: "B32M Input 01"
+    id: "b32m_input_01"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 0
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 02"
+    id: "b32m_input_02"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 1
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 03"
+    id: "b32m_input_03"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 2
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 04"
+    id: "b32m_input_04"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 3
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 05"
+    id: "b32m_input_05"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 4
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 06"
+    id: "b32m_input_06"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 5
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 07"
+    id: "b32m_input_07"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 6
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 08"
+    id: "b32m_input_08"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 7
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 09"
+    id: "b32m_input_09"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 8
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 10"
+    id: "b32m_input_10"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 9
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 11"
+    id: "b32m_input_11"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 10
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 12"
+    id: "b32m_input_12"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 11
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 13"
+    id: "b32m_input_13"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 12
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 14"
+    id: "b32m_input_14"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 13
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 15"
+    id: "b32m_input_15"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 14
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 16"
+    id: "b32m_input_16"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 15
+      mode: INPUT
+      inverted: true
+
+  # Inputs 17-24 (0x25 pins 0-7)
+  - platform: gpio
+    name: "B32M Input 17"
+    id: "b32m_input_17"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 0
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 18"
+    id: "b32m_input_18"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 1
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 19"
+    id: "b32m_input_19"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 2
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 20"
+    id: "b32m_input_20"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 3
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 21"
+    id: "b32m_input_21"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 4
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 22"
+    id: "b32m_input_22"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 5
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 23"
+    id: "b32m_input_23"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 6
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 24"
+    id: "b32m_input_24"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 7
+      mode: INPUT
+      inverted: true
+
+  # Inputs 25-32 (0x26 pins 0-7)
+  - platform: gpio
+    name: "B32M Input 25"
+    id: "b32m_input_25"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 0
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 26"
+    id: "b32m_input_26"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 1
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 27"
+    id: "b32m_input_27"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 2
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 28"
+    id: "b32m_input_28"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 3
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 29"
+    id: "b32m_input_29"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 4
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 30"
+    id: "b32m_input_30"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 5
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 31"
+    id: "b32m_input_31"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 6
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Input 32"
+    id: "b32m_input_32"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 7
+      mode: INPUT
+      inverted: true
+
+# 32 Switches (Outputs)
+switch:
+  # Outputs 1-8 (0x26 pins 8-15)
+  - platform: gpio
+    name: "B32M Output 01"
+    id: "b32m_output_01"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 8
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 02"
+    id: "b32m_output_02"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 9
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 03"
+    id: "b32m_output_03"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 10
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 04"
+    id: "b32m_output_04"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 11
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 05"
+    id: "b32m_output_05"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 12
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 06"
+    id: "b32m_output_06"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 13
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 07"
+    id: "b32m_output_07"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 14
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 08"
+    id: "b32m_output_08"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 15
+      mode: OUTPUT
+      inverted: true
+
+  # Outputs 9-16 (0x25 pins 8-15)
+  - platform: gpio
+    name: "B32M Output 09"
+    id: "b32m_output_09"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 8
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 10"
+    id: "b32m_output_10"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 9
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 11"
+    id: "b32m_output_11"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 10
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 12"
+    id: "b32m_output_12"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 11
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 13"
+    id: "b32m_output_13"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 12
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 14"
+    id: "b32m_output_14"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 13
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 15"
+    id: "b32m_output_15"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 14
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 16"
+    id: "b32m_output_16"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 15
+      mode: OUTPUT
+      inverted: true
+
+  # Outputs 17-24 (0x24 pins 0-7)
+  - platform: gpio
+    name: "B32M Output 17"
+    id: "b32m_output_17"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 0
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 18"
+    id: "b32m_output_18"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 1
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 19"
+    id: "b32m_output_19"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 2
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 20"
+    id: "b32m_output_20"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 3
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 21"
+    id: "b32m_output_21"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 4
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 22"
+    id: "b32m_output_22"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 5
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 23"
+    id: "b32m_output_23"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 6
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 24"
+    id: "b32m_output_24"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 7
+      mode: OUTPUT
+      inverted: true
+
+  # Outputs 25-32 (0x26 pins 0-7)
+  - platform: gpio
+    name: "B32M Output 25"
+    id: "b32m_output_25"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 0
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 26"
+    id: "b32m_output_26"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 1
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 27"
+    id: "b32m_output_27"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 2
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 28"
+    id: "b32m_output_28"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 3
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 29"
+    id: "b32m_output_29"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 4
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 30"
+    id: "b32m_output_30"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 5
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 31"
+    id: "b32m_output_31"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 6
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "B32M Output 32"
+    id: "b32m_output_32"
+    pin:
+      pcf8574: pcf8574_hub_in_out_2
+      number: 7
+      mode: OUTPUT
+      inverted: true
+
+# ADS1115 ADC
+ads1115:
+  - address: 0x48
+    i2c_id: bus_a
+
+sensor:
+  - platform: ads1115
+    multiplexer: 'A0_GND'
+    gain: 6.144
+    name: "B32M ADC A0"
+    update_interval: 5s
+  - platform: ads1115
+    multiplexer: 'A1_GND'
+    gain: 6.144
+    name: "B32M ADC A1"
+    update_interval: 5s
+  - platform: ads1115
+    multiplexer: 'A2_GND'
+    gain: 6.144
+    name: "B32M ADC A2"
+    update_interval: 5s
+  - platform: ads1115
+    multiplexer: 'A3_GND'
+    gain: 6.144
+    name: "B32M ADC A3"
+    update_interval: 5s
+
+# OLED Display
+font:
+  - file: "gfonts://Roboto"
+    id: roboto
+    size: 16
+
+display:
+  - platform: ssd1306_i2c
+    model: "SSD1306 128x64"
+    i2c_id: bus_a
+    address: 0x3C
+    lambda: |-
+      it.printf(0, 0, id(roboto), "KinCony B32M");
+      it.printf(0, 20, id(roboto), "Inputs: 32");
+      it.printf(0, 40, id(roboto), "Outputs: 32");
+
+# Web Server
+web_server:
+  port: 80
+
+# UART for RS485
+uart:
+  id: uart_1
+  baud_rate: 9600
+  tx_pin: GPIO39
+  rx_pin: GPIO38
+  debug:
+    direction: BOTH
+    dummy_receiver: true

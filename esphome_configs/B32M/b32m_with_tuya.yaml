@@ -1,0 +1,323 @@
+esphome:
+  name: b32m
+  friendly_name: B32M Controller (Tuya)
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+  baud_rate: 0  # Disable UART logging for Tuya
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+# Ethernet Configuration (W5500)
+ethernet:
+  type: W5500
+  clk_pin: GPIO1
+  mosi_pin: GPIO2
+  miso_pin: GPIO41
+  cs_pin: GPIO42
+  interrupt_pin: GPIO43
+  reset_pin: GPIO44
+  manual_ip:
+    static_ip: 192.168.1.100
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+
+# I2C Bus Configuration
+i2c:
+  - id: bus_a
+    sda: GPIO8
+    scl: GPIO18
+    scan: true
+    frequency: 400kHz
+
+# PCF8575 I/O Expanders
+pcf8574:
+  # Input 1-16
+  - id: 'pcf8574_hub_in_1'
+    i2c_id: bus_a
+    address: 0x22
+    pcf8575: true
+  # Input 17-24 & Output 1-8
+  - id: 'pcf8574_hub_in_out_1'
+    i2c_id: bus_a
+    address: 0x25
+    pcf8575: true
+  # Output 9-24
+  - id: 'pcf8574_hub_out_1'
+    i2c_id: bus_a
+    address: 0x24
+    pcf8575: true
+  # Input 25-32 & Output 25-32
+  - id: 'pcf8574_hub_in_out_2'
+    i2c_id: bus_a
+    address: 0x26
+    pcf8575: true
+
+# Tuya MCU UART
+uart:
+  - id: tuya_uart
+    tx_pin: GPIO16
+    rx_pin: GPIO17
+    baud_rate: 9600
+
+# Tuya MCU Component
+tuya:
+  uart_id: tuya_uart
+  status_pin: GPIO15
+
+# Tuya Lights (Outputs)
+light:
+  - platform: tuya
+    name: "B32M Output 01"
+    switch_datapoint: 1
+  - platform: tuya
+    name: "B32M Output 02"
+    switch_datapoint: 2
+  - platform: tuya
+    name: "B32M Output 03"
+    switch_datapoint: 3
+  - platform: tuya
+    name: "B32M Output 04"
+    switch_datapoint: 4
+  - platform: tuya
+    name: "B32M Output 05"
+    switch_datapoint: 5
+  - platform: tuya
+    name: "B32M Output 06"
+    switch_datapoint: 6
+  - platform: tuya
+    name: "B32M Output 07"
+    switch_datapoint: 7
+  - platform: tuya
+    name: "B32M Output 08"
+    switch_datapoint: 8
+  - platform: tuya
+    name: "B32M Output 09"
+    switch_datapoint: 9
+  - platform: tuya
+    name: "B32M Output 10"
+    switch_datapoint: 10
+  - platform: tuya
+    name: "B32M Output 11"
+    switch_datapoint: 11
+  - platform: tuya
+    name: "B32M Output 12"
+    switch_datapoint: 12
+  - platform: tuya
+    name: "B32M Output 13"
+    switch_datapoint: 13
+  - platform: tuya
+    name: "B32M Output 14"
+    switch_datapoint: 14
+  - platform: tuya
+    name: "B32M Output 15"
+    switch_datapoint: 15
+  - platform: tuya
+    name: "B32M Output 16"
+    switch_datapoint: 16
+  - platform: tuya
+    name: "B32M Output 17"
+    switch_datapoint: 17
+  - platform: tuya
+    name: "B32M Output 18"
+    switch_datapoint: 18
+  - platform: tuya
+    name: "B32M Output 19"
+    switch_datapoint: 19
+  - platform: tuya
+    name: "B32M Output 20"
+    switch_datapoint: 20
+  - platform: tuya
+    name: "B32M Output 21"
+    switch_datapoint: 21
+  - platform: tuya
+    name: "B32M Output 22"
+    switch_datapoint: 22
+  - platform: tuya
+    name: "B32M Output 23"
+    switch_datapoint: 23
+  - platform: tuya
+    name: "B32M Output 24"
+    switch_datapoint: 24
+  - platform: tuya
+    name: "B32M Output 25"
+    switch_datapoint: 25
+  - platform: tuya
+    name: "B32M Output 26"
+    switch_datapoint: 26
+  - platform: tuya
+    name: "B32M Output 27"
+    switch_datapoint: 27
+  - platform: tuya
+    name: "B32M Output 28"
+    switch_datapoint: 28
+  - platform: tuya
+    name: "B32M Output 29"
+    switch_datapoint: 29
+  - platform: tuya
+    name: "B32M Output 30"
+    switch_datapoint: 30
+  - platform: tuya
+    name: "B32M Output 31"
+    switch_datapoint: 31
+  - platform: tuya
+    name: "B32M Output 32"
+    switch_datapoint: 32
+
+# Tuya Binary Sensors (Inputs)
+binary_sensor:
+  - platform: tuya
+    name: "B32M Input 01"
+    sensor_datapoint: 101
+  - platform: tuya
+    name: "B32M Input 02"
+    sensor_datapoint: 102
+  - platform: tuya
+    name: "B32M Input 03"
+    sensor_datapoint: 103
+  - platform: tuya
+    name: "B32M Input 04"
+    sensor_datapoint: 104
+  - platform: tuya
+    name: "B32M Input 05"
+    sensor_datapoint: 105
+  - platform: tuya
+    name: "B32M Input 06"
+    sensor_datapoint: 106
+  - platform: tuya
+    name: "B32M Input 07"
+    sensor_datapoint: 107
+  - platform: tuya
+    name: "B32M Input 08"
+    sensor_datapoint: 108
+  - platform: tuya
+    name: "B32M Input 09"
+    sensor_datapoint: 109
+  - platform: tuya
+    name: "B32M Input 10"
+    sensor_datapoint: 110
+  - platform: tuya
+    name: "B32M Input 11"
+    sensor_datapoint: 111
+  - platform: tuya
+    name: "B32M Input 12"
+    sensor_datapoint: 112
+  - platform: tuya
+    name: "B32M Input 13"
+    sensor_datapoint: 113
+  - platform: tuya
+    name: "B32M Input 14"
+    sensor_datapoint: 114
+  - platform: tuya
+    name: "B32M Input 15"
+    sensor_datapoint: 115
+  - platform: tuya
+    name: "B32M Input 16"
+    sensor_datapoint: 116
+  - platform: tuya
+    name: "B32M Input 17"
+    sensor_datapoint: 117
+  - platform: tuya
+    name: "B32M Input 18"
+    sensor_datapoint: 118
+  - platform: tuya
+    name: "B32M Input 19"
+    sensor_datapoint: 119
+  - platform: tuya
+    name: "B32M Input 20"
+    sensor_datapoint: 120
+  - platform: tuya
+    name: "B32M Input 21"
+    sensor_datapoint: 121
+  - platform: tuya
+    name: "B32M Input 22"
+    sensor_datapoint: 122
+  - platform: tuya
+    name: "B32M Input 23"
+    sensor_datapoint: 123
+  - platform: tuya
+    name: "B32M Input 24"
+    sensor_datapoint: 124
+  - platform: tuya
+    name: "B32M Input 25"
+    sensor_datapoint: 125
+  - platform: tuya
+    name: "B32M Input 26"
+    sensor_datapoint: 126
+  - platform: tuya
+    name: "B32M Input 27"
+    sensor_datapoint: 127
+  - platform: tuya
+    name: "B32M Input 28"
+    sensor_datapoint: 128
+  - platform: tuya
+    name: "B32M Input 29"
+    sensor_datapoint: 129
+  - platform: tuya
+    name: "B32M Input 30"
+    sensor_datapoint: 130
+  - platform: tuya
+    name: "B32M Input 31"
+    sensor_datapoint: 131
+  - platform: tuya
+    name: "B32M Input 32"
+    sensor_datapoint: 132
+
+# ADS1115 ADC
+ads1115:
+  - address: 0x48
+    i2c_id: bus_a
+
+sensor:
+  - platform: ads1115
+    multiplexer: 'A0_GND'
+    gain: 6.144
+    name: "B32M ADC A0"
+    update_interval: 5s
+  - platform: ads1115
+    multiplexer: 'A1_GND'
+    gain: 6.144
+    name: "B32M ADC A1"
+    update_interval: 5s
+  - platform: ads1115
+    multiplexer: 'A2_GND'
+    gain: 6.144
+    name: "B32M ADC A2"
+    update_interval: 5s
+  - platform: ads1115
+    multiplexer: 'A3_GND'
+    gain: 6.144
+    name: "B32M ADC A3"
+    update_interval: 5s
+
+# OLED Display
+font:
+  - file: "gfonts://Roboto"
+    id: roboto
+    size: 16
+
+display:
+  - platform: ssd1306_i2c
+    model: "SSD1306 128x64"
+    i2c_id: bus_a
+    address: 0x3C
+    lambda: |-
+      it.printf(0, 0, id(roboto), "KinCony B32M");
+      it.printf(0, 20, id(roboto), "Tuya Mode");
+      it.printf(0, 40, id(roboto), "IO: 32/32");
+
+# Web Server
+web_server:
+  port: 80

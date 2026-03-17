@@ -1,0 +1,531 @@
+esphome:
+  name: b24m
+  friendly_name: b24m
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: arduino
+
+logger:
+
+api:
+
+ethernet:
+  type: W5500
+  clk_pin: GPIO1
+  mosi_pin: GPIO2
+  miso_pin: GPIO41
+  cs_pin: GPIO42
+  interrupt_pin: GPIO43
+  reset_pin: GPIO44
+
+uart:
+  - id: uart_1    #RS485
+    baud_rate: 9600
+    debug:
+      direction: BOTH
+      dummy_receiver: true
+    after:
+      timeout: 10ms
+    tx_pin: 39
+    rx_pin: 38
+
+i2c:
+  - id: bus_a
+    sda: 8
+    scl: 18
+    scan: true
+    frequency: 400kHz
+
+pcf8574:
+  - id: 'pcf8574_hub_in_1'  # for input channel 1-16
+    i2c_id: bus_a
+    address: 0x22
+    pcf8575: true
+  - id: 'pcf8574_hub_in_out_1'  # for digital input channel 17-24 & ouptut 1-8
+    i2c_id: bus_a
+    address: 0x25
+    pcf8575: true
+  - id: 'pcf8574_hub_out_1'  # for output channel 9-24
+    i2c_id: bus_a
+    address: 0x24
+    pcf8575: true
+
+binary_sensor:
+  - platform: gpio
+    name: "b24m-input01"
+    id: "b24m_input01"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 8
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input02"
+    id: "b24m_input02"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 9
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input03"
+    id: "b24m_input03"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 10
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input04"
+    id: "b24m_input04"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 11
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input05"
+    id: "b24m_input05"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 12
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input06"
+    id: "b24m_input06"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 13
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input07"
+    id: "b24m_input07"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 14
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input08"
+    id: "b24m_input08"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 15
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input09"
+    id: "b24m_input09"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 0
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input10"
+    id: "b24m_input10"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 1
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input11"
+    id: "b24m_input11"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 2
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input12"
+    id: "b24m_input12"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 3
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input13"
+    id: "b24m_input13"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 4
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input14"
+    id: "b24m_input14"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 5
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input15"
+    id: "b24m_input15"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 6
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input16"
+    id: "b24m_input16"
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 7
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input17"
+    id: "b24m_input17"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 0
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input18"
+    id: "b24m_input18"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 1
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input19"
+    id: "b24m_input19"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 2
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input20"
+    id: "b24m_input20"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 3
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input21"
+    id: "b24m_input21"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 4
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input22"
+    id: "b24m_input22"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 5
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input23"
+    id: "b24m_input23"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 6
+      mode: INPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-input24"
+    id: "b24m_input24"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 7
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: "b24m-io40"
+    pin:
+      number: 40
+      inverted: true
+
+  - platform: gpio
+    name: "b24m-io48"
+    pin:
+      number: 48
+      inverted: true
+
+  - platform: gpio
+    name: "b24m-io47"
+    pin:
+      number: 47
+      inverted: true
+
+  - platform: gpio
+    name: "b24m-io7"
+    pin:
+      number: 7
+      inverted: true
+
+  - platform: gpio
+    name: "b24m-io13"
+    pin:
+      number: 13
+      inverted: false
+
+  - platform: gpio
+    name: "b24m-io14"
+    pin:
+      number: 14
+      inverted: false
+
+  - platform: gpio
+    name: "b24m-io21"
+    pin:
+      number: 21
+      inverted: false
+
+switch:
+  - platform: gpio
+    name: "b24m-output01"
+    id: "b24m_output01"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 8
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output02"
+    id: "b24m_output02"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 9
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output03"
+    id: "b24m_output03"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 10
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output04"
+    id: "b24m_output04"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 11
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output05"
+    id: "b24m_output05"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 12
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output06"
+    id: "b24m_output06"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 13
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output07"
+    id: "b24m_output07"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 14
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output08"
+    id: "b24m_output08"
+    pin:
+      pcf8574: pcf8574_hub_in_out_1
+      number: 15
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "b24m-output09"
+    id: "b24m_output09"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 0
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output10"
+    id: "b24m_output10"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 1
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output11"
+    id: "b24m_output11"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 2
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output12"
+    id: "b24m_output12"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 3
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output13"
+    id: "b24m_output13"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 4
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output14"
+    id: "b24m_output14"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 5
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output15"
+    id: "b24m_output15"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 6
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output16"
+    id: "b24m_output16"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 7
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output17"
+    id: "b24m_output17"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 8
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output18"
+    id: "b24m_output18"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 9
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output19"
+    id: "b24m_output19"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 10
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output20"
+    id: "b24m_output20"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 11
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output21"
+    id: "b24m_output21"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 12
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output22"
+    id: "b24m_output22"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 13
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output23"
+    id: "b24m_output23"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 14
+      mode: OUTPUT
+      inverted: true
+  - platform: gpio
+    name: "b24m-output24"
+    id: "b24m_output24"
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 15
+      mode: OUTPUT
+      inverted: true
+
+  - platform: uart
+    uart_id: uart_1
+    name: "RS485 Button"
+    data: [0x11, 0x22, 0x33, 0x44, 0x55]
+
+ads1115:
+  - address: 0x48
+
+sensor:
+  - platform: ads1115
+    multiplexer: 'A0_GND'
+    gain: 6.144
+    resolution: 16_BITS
+    name: "ADS1115 Channel A0-GND"
+    update_interval: 5s
+  - platform: ads1115
+    multiplexer: 'A1_GND'
+    gain: 6.144
+    name: "ADS1115 Channel A1-GND"
+    update_interval: 5s
+  - platform: ads1115
+    multiplexer: 'A2_GND'
+    gain: 6.144
+    name: "ADS1115 Channel A2-GND"
+    update_interval: 5s
+  - platform: ads1115
+    multiplexer: 'A3_GND'
+    gain: 6.144
+    name: "ADS1115 Channel A3-GND"
+    update_interval: 5s
+
+web_server:
+  port: 80
+
+font:
+  - file: "gfonts://Roboto"
+    id: roboto
+    size: 20
+
+display:
+  - platform: ssd1306_i2c
+    i2c_id: bus_a
+    model: "SSD1306 128x64"
+    address: 0x3C
+    lambda: |-
+      it.printf(0, 0, id(roboto), "FeedCurrent b24m");

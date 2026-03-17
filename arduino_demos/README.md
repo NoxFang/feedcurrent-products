@@ -4,8 +4,16 @@ This directory contains Arduino example sketches for various KinCony controllers
 
 ## Directory Structure
 
-- `B4M/` – Examples for the **B4M** model (ESP32-S3)
-- `B4/`  – Examples for the **B4** model (ESP32-S3) – functionally identical to B4M
+- `B32M/` – Examples for the **B32M** model (ESP32-S3, 32CH MOSFET)
+- `B32/`  – Examples for the **B32** model (ESP32-S3) – functionally identical to B32M
+- `B24M/` – Examples for the **B24M** model (ESP32-S3, 24CH Relay)
+- `B24/`  – Examples for the **B24** model (ESP32-S3) – functionally identical to B24M
+- `B16M/` – Examples for the **B16M** model (ESP32-S3, 16CH Relay)
+- `B16/`  – Examples for the **B16** model (ESP32-S3) – functionally identical to B16M
+- `B8M/`  – Examples for the **B8M** model (ESP32-S3, 8CH Relay)
+- `B8/`   – Examples for the **B8** model (ESP32-S3) – functionally identical to B8M
+- `B4M/`  – Examples for the **B4M** model (ESP32-S3, 4CH Relay)
+- `B4/`   – Examples for the **B4** model (ESP32-S3) – functionally identical to B4M
 
 Within each product folder, examples are numbered and named according to their function (e.g., `01_sequential_on_off`). Every example folder contains:
 
