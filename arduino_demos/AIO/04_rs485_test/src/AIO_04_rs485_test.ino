@@ -1,0 +1,62 @@
+/*
+* Made by FeedCurrent IoT: https://www.feedcurrent.com
+*
+* RS485 Communication Test
+*
+* This program is a simple test for RS485 communication using ESP32-S3.
+* It will send a message over RS485 and then read incoming messages.
+* The TXD pin is defined as GPIO 16 and RXD pin is defined as GPIO 17.
+*/
+
+#include <HardwareSerial.h>
+
+// Define RS485 pins
+#define RS485_RXD 47
+#define RS485_TXD 3
+
+// Create a hardware serial object
+HardwareSerial rs485Serial(1);
+
+void setup() {
+  // Start serial communication for debugging
+  Serial.begin(115200);
+  while (!Serial);
+  
+  // Initialize RS485 Serial communication
+  rs485Serial.begin(9600, SERIAL_8N1, RS485_RXD, RS485_TXD);
+  
+  Serial.println("AIO Example 04: RS485 Communication Test");
+  Serial.println("=========================================");
+  Serial.println("RS485 Pin Configuration:");
+  Serial.println("  RXD (Receive) -> GPIO 47");
+  Serial.println("  TXD (Transmit) -> GPIO 3");
+  Serial.println("  Baud Rate: 9600");
+  Serial.println("  Parity: N (None)");
+  Serial.println("  Data Bits: 8");
+  Serial.println("  Stop Bits: 1");
+  Serial.println("");
+  Serial.println("RS485 Test Start");
+}
+
+void loop() {
+  // Send a test message
+  rs485Serial.println("Hello from KinCony AIO Controller!");
+  
+  // Wait for a short period
+  delay(1000);
+  
+  // Check if data is available to read
+  if (rs485Serial.available()) {
+    String receivedMessage = "";
+    while (rs485Serial.available()) {
+      char c = rs485Serial.read();
+      receivedMessage += c;
+    }
+    // Print the received message
+    Serial.print("Received: ");
+    Serial.println(receivedMessage);
+  }
+  
+  // Wait before sending the next message
+  delay(2000);
+}
