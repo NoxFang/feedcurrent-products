@@ -24,7 +24,7 @@ Flash `precompiled/N10_05_collect_all_data.bin` to address `0x0` using ESP Flash
   ```cpp
   static const uint8_t maxTXLen = 254;
   static const uint8_t ku8MaxBuffersize = 126;
-
+  ```
 This is required to handle the 68‑register (136‑byte) Modbus response.
 
 - Steps: Open the .ino file, select esp32-s3-devkitc-1, and upload.
