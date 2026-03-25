@@ -1,47 +1,84 @@
-# Products Software Solutions
+# FeedCurrent Products – Software Resources
 
-This repository provides software resources for IoT controllers, including:
-
-1. **ESP32 I/O Pin Definitions** – GPIO assignments for each product.
-2. **ESPHome Configuration Files** – Ready-to-use YAML for Home Assistant integration.
-3. **Arduino Demo Source Code** – Example sketches demonstrating basic functionalities.
+This repository contains systematically organized software resources for FeedCurrent ESP32‑S3 based controllers.  
+Resources include **pin definitions**, **ESPHome YAML configurations**, and **Arduino example sketches** for each product.
 
 ## Repository Structure
+```cpp
+feedcurrent-products/
+├── pin_definitions/ # GPIO pinout tables per product
+├── esphome_configs/ # ESPHome YAML files (with/without Tuya)
+└── arduino_demos/ # Arduino example sketches
+```
 
-- `pin_definitions/` - ESP32 I/O pin definitions for each product
-  - `pin_definitions/B4M/` - B4M model
+## Supported Products
 
-- `esphome_configs/` - ESPHome YAML configuration files for Home Assistant
-  - `B4M_esphome_with_tuya.yaml`
-  - `B4M_esphome_without_tuya.yaml`
+### F Series – Relay Controllers
+- F4, F8, F16, F24, F32  
+  *Relay outputs, digital inputs, analog inputs, RS485, Ethernet, SD card, RTC, OLED, Tuya WiFi.*
 
-- `arduino_demos/` - Arduino example source code
-  - `B4M/` - Product-specific demos
-    - `01_sequential_on_off/`
-      - `src/` - Source code (.ino)
-      - `precompiled/` - Precompiled binaries (.bin)
-      - `README.md`
-    - `02_read_digital_inputs/`
-      - `src/`
-      - `precompiled/`
-      - `README.md`
-    - (more demos will be added)
+### DM Series – Digital Input Modules
+- DM4, DM8, DM16, DM32  
+  *Dedicated digital input expansion boards.*
 
-## How to Use
+### N Series – Energy Meter Controllers
+- N10, N20, N30, N60  
+  *Multi‑channel energy metering via RS485 Modbus, SD card, Ethernet, OLED.*
 
-- Clone the repository:
-  git clone https://github.com/NoxFang/feedcurrent-products.git
-- Navigate to the folder of your product (e.g., arduino_demos/B4M/).
-- Read the README.md inside each demo or config folder for specific instructions.
+### T Series – High‑Density I/O Controllers
+- T16M, T32M, T64M, T128M  
+  *Large‑scale relay and input boards (up to 128 channels), dual I2C buses, Ethernet, RS485.*
+
+### B Series – MOSFET & Relay Boards
+- B4, B4M, B8, B8M, B16, B16M, B24, B24M  
+  *Relay and MOSFET variants with same pin layouts.*
+
+### Special / Industrial
+- G1 (Gateway), TA (Thermostat Adapter), AIO Hybrid  
+  *Specialised controllers with integrated peripherals (RF433, Zigbee, IR, DAC, etc.).*
+
+## Directory Details
+
+### Pin Definitions (`pin_definitions/`)
+Each product folder contains a `_pin_definition.md` file listing GPIO assignments, I2C addresses, and hardware‑specific notes.
+
+### ESPHome Configurations (`esphome_configs/`)
+For each product, two YAML files are provided:
+- `with_tuya.yaml` – includes Tuya cloud integration
+- `without_tuya.yaml` – pure local ESPHome setup
+
+### Arduino Examples (`arduino_demos/`)
+Each product has numbered example folders (01 to up to 13) with:
+- `src/` – Arduino `.ino` source code
+- `precompiled/` – ready‑to‑flash `.bin` firmware
+- `README.md` – detailed explanation of the example
+
+## Usage
+
+1. **Browse** the product folder you are interested in.
+2. **Check** the pin definition for correct wiring.
+3. **Choose** either ESPHome for Home Assistant integration or Arduino for custom programming.
+4. **Flash** the precompiled binaries (at address `0x0`) or compile from source.
+
+## Requirements
+
+- **Hardware**: Any supported FeedCurrent controller
+- **Software**: Arduino IDE (with ESP32‑S3 support) or ESPHome
+- **Libraries**: As listed in each example’s README (e.g., `PCF8575`, `U8g2`, `DS3231`)
 
 ## Contributing
 
-Feel free to open issues or pull requests if you have improvements or additional examples. Please follow the existing folder structure and naming conventions.
+When adding a new product:
+1. Create a subfolder under `pin_definitions/`, `esphome_configs/`, and `arduino_demos/`.
+2. Follow the established naming and structure conventions.
+3. Provide clear English documentation.
+4. Reference the source forum threads (if applicable).
 
-## License
+## Version History
 
-This project is licensed under the MIT License – see the LICENSE file for details.
+- **2026‑03‑25** – Added T16M, T32M, T64M, T128M, N10/N20/N30/N60, F24/F32, and all corresponding examples.
+- **2026‑03‑21** – Initial AIO Hybrid documentation included.
 
-## Support
+---
 
-Code issues: Open an issue on GitHub
+*This repository is maintained for reference and development purposes. Refer to the official product documentation for warranties and support.*
