@@ -1,7 +1,7 @@
 /*
 * Made by FeedCurrent IoT: https://www.feedcurrent.com
 *
-* Demo Program for Reading Data from FeedCurrent N60 Energy Meter (60-channel version)
+* Demo Program for Reading Data from FeedCurrent N20 Energy Meter (20-channel version)
 * via RS485 Modbus using ESP32 and NonBlockingModbusMaster library.
 *
 * This example:
