@@ -45,6 +45,7 @@ If available, each example folder also contains a `precompiled/` subdirectory wi
 
 ## Example 05 Special Notes (Modbus Data Collection)
 
+- **Library installation**: Before running the code, you must install the `NonBlockingModbusMaster` Arduino library.
 - **Library modification**: Before compiling example 05, modify the `NonBlockingModbusMaster` library header to handle large responses:
   ```cpp
   static const uint8_t maxTXLen = 254;
