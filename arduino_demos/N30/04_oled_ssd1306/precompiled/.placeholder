@@ -1,0 +1,3 @@
+This directory will contain precompiled binary files (.bin) for direct flashing.
+Flash address: 0x0
+Tool: esptool.py or ESP32 Flash Download Tool
