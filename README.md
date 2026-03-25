@@ -1,14 +1,15 @@
 # FeedCurrent Products – Software Resources
 
 This repository contains systematically organized software resources for FeedCurrent ESP32‑S3 based controllers.  
-Resources include **pin definitions**, **ESPHome YAML configurations**, and **Arduino example sketches** for each product.
+Resources include **pin definitions**, **ESPHome YAML configurations**, **Arduino example sketches**, and **KCS firmware** for each product.
 
 ## Repository Structure
 ```cpp
 feedcurrent-products/
 ├── pin_definitions/ # GPIO pinout tables per product
 ├── esphome_configs/ # ESPHome YAML files (with/without Tuya)
-└── arduino_demos/ # Arduino example sketches
+├── arduino_demos/ # Arduino example sketches
+└── kcs_firmware/ # KCS firmware binaries (per model)
 ```
 
 ## Supported Products
@@ -53,29 +54,39 @@ Each product has numbered example folders (01 to up to 13) with:
 - `precompiled/` – ready‑to‑flash `.bin` firmware
 - `README.md` – detailed explanation of the example
 
+### KCS Firmware (`kcs_firmware/`)
+Pre‑compiled KCS system firmware for each product model.  
+- Subdirectories are named after the product (e.g., `F16/`, `T64M/`).
+- Each folder contains one or more `.bin` files (e.g., `kcs_v3.24.2.bin`).
+- Flash at address `0x0` using ESP Flash Download Tool or `esptool.py`.
+
 ## Usage
 
 1. **Browse** the product folder you are interested in.
 2. **Check** the pin definition for correct wiring.
-3. **Choose** either ESPHome for Home Assistant integration or Arduino for custom programming.
-4. **Flash** the precompiled binaries (at address `0x0`) or compile from source.
+3. **Choose** either:
+   - **ESPHome** for Home Assistant integration
+   - **Arduino** for custom programming
+   - **KCS firmware** for the complete production‑ready system
+4. **Flash** the appropriate firmware (precompiled binaries at address `0x0`) or compile from source.
 
 ## Requirements
 
 - **Hardware**: Any supported FeedCurrent controller
-- **Software**: Arduino IDE (with ESP32‑S3 support) or ESPHome
+- **Software**: Arduino IDE (with ESP32‑S3 support), ESPHome, or ESP Flash Download Tool
 - **Libraries**: As listed in each example’s README (e.g., `PCF8575`, `U8g2`, `DS3231`)
 
 ## Contributing
 
 When adding a new product:
-1. Create a subfolder under `pin_definitions/`, `esphome_configs/`, and `arduino_demos/`.
+1. Create a subfolder under `pin_definitions/`, `esphome_configs/`, `arduino_demos/`, and `kcs_firmware/`.
 2. Follow the established naming and structure conventions.
 3. Provide clear English documentation.
 4. Reference the source forum threads (if applicable).
 
 ## Version History
 
+- **2026‑03‑26** – Added `kcs_firmware/` directory with KCS v3.24.2 firmware for all models.
 - **2026‑03‑25** – Added T16M, T32M, T64M, T128M, N10/N20/N30/N60, F24/F32, and all corresponding examples.
 - **2026‑03‑21** – Initial AIO Hybrid documentation included.
 
