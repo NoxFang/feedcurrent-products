@@ -77,4 +77,4 @@ Two configuration variants are provided:
 ## Related Resources
 - Pin definition: `../../pin_definitions/B4M/B4M_pin_definition.md`
 - Arduino examples: `../../arduino_demos/B4M/`
-- Tuya external component: esphome-tuya-wifi-mcu
+- Tuya external component: [esphome-tuya-wifi-mcu](https://github.com/hzkincony/esphome-tuya-wifi-mcu)
