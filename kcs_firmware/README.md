@@ -14,8 +14,8 @@ The same firmware binary works across all supported models.
 
 ## Firmware Files
 
-- `kcs_v3.15.0.bin` – Latest stable release
-- Older versions are kept for reference
+- `kcs_v3.25.0.bin` – Latest stable release
+- Older versions are kept for reference (e.g., 'kcs_v3.24.2.bin')
 
 ## Flashing Instructions
 
@@ -31,7 +31,8 @@ The same firmware binary works across all supported models.
 
 | Version | Date       | Notes                         |
 |---------|------------|-------------------------------|
-| v3.24.2 | 2026-03-25 | Latest unified release        |
+| v3.25.0 | 2026-05-17 | Latest unified release        |
+| v3.24.2 | 2026-03-25 | Previous stable release       |
 
 ## Notes
 
