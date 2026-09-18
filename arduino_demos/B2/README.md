@@ -1,131 +1,146 @@
-# B4 Arduino Examples
+# B2 Arduino Examples
 
-This directory contains 11 Arduino example sketches for the **KinCony B4** controller - a 4-channel relay controller based on ESP32-S3.
+This directory contains 11 Arduino example sketches for the **FeedCurrent B2** controller – a compact 2-channel relay controller based on ESP32-S3.
 
-## B4 Hardware Overview
+## B2 Hardware Overview
 
-- **MCU**: ESP32-S3-WROOM-1U
-- **Outputs**: 4 Channel Relay (via PCF8575 I2C expander)
-- **Inputs**: 4 Channel Digital Input (via PCF8575 I2C expander)
-- **ADC**: 4-Channel 16-bit ADS1115
+- **MCU**: ESP32-S3
+- **Outputs**: 2 Channel Relay (direct GPIO control, active‑LOW)
+- **Inputs**: 2 Channel Digital Input (direct GPIO, with/without pull‑up)
+- **ADC**: 4-Channel 16-bit ADS1115 (I2C)
 - **Communication**: Ethernet (W5500), RS485, I2C, UART
 - **Storage**: SD Card (SPI)
-- **Display**: SSD1306 128x64 OLED
-- **RTC**: DS3231 Real-Time Clock
-- **WiFi**: Tuya WiFi Module support
-- **Free GPIOs**: 8 pins (4 with pull-up, 4 without)
+- **Display**: SSD1306 128×64 OLED (I2C)
+- **RTC**: DS3231 Real-Time Clock (I2C)
+- **WiFi**: Tuya WiFi Module support (UART)
+- **Free GPIOs**: 4 pins (GPIO47, GPIO48, GPIO17, GPIO40)
 
 ## Example List
 
-### 01. Sequential ON/OFF
-**Directory**: `01_sequential_on_off/`
+### 01. Turn ON/OFF Relay
+**Directory**: `01_turn_on_off_relay/`
 
-Demonstrates sequential control of all 4 relay outputs.
+Controls the 2 relays sequentially (ON/OFF patterns).
 
 ---
 
 ### 02. Read Digital Inputs
 **Directory**: `02_read_digital_inputs/`
 
-Reads the state of all 4 digital inputs.
+Reads the state of the 2 digital inputs (GPIO6, GPIO7) and prints changes.
 
 ---
 
 ### 03. Read ADS1115 ADC
 **Directory**: `03_read_ads1115/`
 
-Reads analog voltage from 4 ADC channels.
+Reads analog voltage from 4 ADS1115 channels (A0–A3) in millivolts.
 
 ---
 
 ### 04. RS485 Communication Test
-**Directory**: `04_rs485_communication_test/`
+**Directory**: `04_rs485_test/`
 
-Tests RS485 communication.
+Sends a test message over RS485 and prints any received data.
 
 ---
 
 ### 05. Read Free GPIO State
 **Directory**: `05_read_free_gpio/`
 
-Monitors 8 free GPIO pins.
+Monitors 4 free GPIO pins (47, 48, 17, 40) for state changes.
 
 ---
 
 ### 06. SD Card Operations
-**Directory**: `06_sd_card_operations/`
+**Directory**: `06_sd_card/`
 
-SD card read/write operations.
+Demonstrates SD card file read/write/append/delete and performance test.
 
 ---
 
 ### 07. DS3231 RTC
 **Directory**: `07_ds3231_rtc/`
 
-Real-time clock interface.
+Reads and sets the DS3231 real-time clock via serial commands.
 
 ---
 
 ### 08. Ethernet TCP Server
 **Directory**: `08_ethernet_tcp_server/`
 
-W5500 TCP server setup.
+Configures W5500 Ethernet as a TCP server (port 4196) that echoes received data.
 
 ---
 
 ### 09. Tuya Communication
 **Directory**: `09_tuya_communication/`
 
-Tuya WiFi module communication.
+Implements UART communication with a Tuya WiFi module (heartbeat, product info, etc.).
 
 ---
 
 ### 10. OLED SSD1306
 **Directory**: `10_oled_ssd1306/`
 
-OLED display control.
+Displays “FEEDCURRENT” and “www.feedcurrent.com” on the onboard OLED.
 
 ---
 
 ### 11. Input Trigger Output
 **Directory**: `11_input_trigger_output/`
 
-Direct input-to-output linking.
+Directly links the 2 digital inputs to the 2 relays (input HIGH → relay ON).
 
 ## Directory Structure
-
-```
+```cpp
 example_name/
 ├── src/
-│   └── B4_XX_example_name.ino
+│ └── B2_XX_example_name.ino
 ├── precompiled/
-│   └── B4_XX_example_name.bin
+│ └── B2_XX_example_name.bin
 └── README.md
 ```
 
 ## Quick Start
 
 ### Using Precompiled Binary
-Flash `.bin` from `precompiled/` to address `0x0`.
+Flash the `.bin` file from `precompiled/` to address `0x0` using ESP Flash Download Tool or `esptool.py`.
 
 ### Compiling from Source
-1. Open `.ino` in Arduino IDE
-2. Install libraries
-3. Select `ESP32-S3 DevKitC-1`
-4. Compile and upload
+1. Open the `.ino` file in Arduino IDE.
+2. Install the required libraries (see below).
+3. Select the board `ESP32-S3-DevKitC-1`.
+4. Compile and upload.
 
 ## Required Libraries
 
-- PCF8575, DFRobot_ADS1115, DS3231, Ethernet, U8g2, SD
+- `DFRobot_ADS1115` (for example 03)
+- `DS3231` (for example 07)
+- `Ethernet` (for example 08)
+- `U8g2` (for example 10)
+- `SD`, `SPI`, `Wire` (built‑in)
 
 ## Hardware Connections
 
-- I2C: SDA=GPIO8, SCL=GPIO18
-- PCF8575 Input: 0x22, Output: 0x24
-- ADS1115: 0x48, OLED: 0x3C, RTC: 0x68
+| Interface | Pins / Address |
+|-----------|----------------|
+| I2C (OLED, RTC, ADS1115) | SDA = GPIO8, SCL = GPIO18 |
+| ADS1115 | I2C address 0x48 or 0x49 (check module) |
+| OLED | I2C address 0x3C |
+| RTC (DS3231) | I2C address 0x68 |
+| Relays | Relay 1 = GPIO4, Relay 2 = GPIO46 (active‑LOW) |
+| Digital Inputs | DI1 = GPIO6, DI2 = GPIO7 |
+| RS485 | RX = GPIO39, TX = GPIO38 |
+| SD Card | SCK = GPIO11, MISO = GPIO12, MOSI = GPIO10, CS = GPIO9 |
+| Ethernet (W5500) | CLK = GPIO1, MOSI = GPIO2, MISO = GPIO41, CS = GPIO42, RST = GPIO44, INT = GPIO43 |
+| Tuya Module | TX = GPIO15, RX = GPIO16 |
+| Free GPIOs | GPIO47, GPIO48, GPIO17, GPIO40 |
 
 ## Notes
 
-- PCF8575 uses **active LOW** logic
-- GPIO0: do not pull LOW during boot
-- Serial baud: 115200
+- Relays are **active‑LOW** (`LOW` = ON, `HIGH` = OFF).
+- Digital inputs (GPIO6, GPIO7) are configured as plain `INPUT`; add external pull‑up/pull‑down or change to `INPUT_PULLUP` as needed.
+- GPIO0 is used for boot mode; avoid pulling it LOW during power‑up.
+- Serial Monitor baud rate: **115200**.
+- Some code comments may mention incorrect pin numbers – always refer to the actual `#define` values in the source.
