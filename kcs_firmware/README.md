@@ -9,13 +9,14 @@ The same firmware binary works across all supported models.
 - DM Series: DM4, DM8, DM16, DM32
 - N Series: N10, N20, N30, N60
 - T Series: T16M, T32M, T64M, T128M
-- B Series: B4, B4M, B8, B8M, B16, B16M, B24, B24M
+- B Series: B2, B4, B4M, B8, B8M, B16, B16M, B24, B24M
+- CO Series: CO16
 - Special: G1, TA, AIO Hybrid
 
 ## Firmware Files
 
-- `kcs_v3.25.0.bin` – Latest stable release
-- Older versions are kept for reference (e.g., 'kcs_v3.24.2.bin')
+- `kcs_v3.27.2.bin` – Latest stable release (2026-09-11)
+- Older versions are kept for reference (e.g., `kcs_v3.27.1.bin`, `kcs_v3.27.0.bin`)
 
 ## Flashing Instructions
 
@@ -31,8 +32,13 @@ The same firmware binary works across all supported models.
 
 | Version | Date       | Notes                         |
 |---------|------------|-------------------------------|
-| v3.25.0 | 2026-05-17 | Latest unified release        |
-| v3.24.2 | 2026-03-25 | Previous stable release       |
+| v3.27.2 | 2026-09-11 | Latest unified release        |
+| v3.27.1 | 2026-09-08 | Maintenance release           |
+| v3.27.0 | 2026-09-07 | Feature update                |
+| v3.26.1 | 2026-07-19 | Maintenance release           |
+| v3.25.4 | 2026-06-22 | Maintenance release           |
+| v3.25.0 | 2026-05-17 | Previous stable release       |
+| v3.24.2 | 2026-03-25 | Legacy release                |
 
 ## Notes
 
