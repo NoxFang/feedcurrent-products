@@ -1,0 +1,936 @@
+esphome:
+  name: kincony-co16
+  friendly_name: KinCony CO16
+  name_add_mac_suffix: true
+  min_version: 2026.5.3
+
+esp32:
+  variant: esp32s3
+  flash_size: 16MB
+  framework:
+    type: esp-idf
+    sdkconfig_options:
+      CONFIG_ESP32S3_DEFAULT_CPU_FREQ_240: y
+      CONFIG_ESP32S3_DATA_CACHE_64KB: y
+      CONFIG_ESP32S3_DATA_CACHE_LINE_64B: y
+      CONFIG_SPIRAM_FETCH_INSTRUCTIONS: y
+      CONFIG_SPIRAM_RODATA: y
+
+psram:
+  mode: octal
+  speed: 80MHz
+
+logger:
+  hardware_uart: USB_SERIAL_JTAG
+
+api:
+
+ota:
+  - platform: esphome
+
+ethernet:
+  type: W5500
+  clk_pin: GPIO1
+  mosi_pin: GPIO2
+  miso_pin: GPIO41
+  cs_pin: GPIO42
+  interrupt_pin: GPIO43
+  reset_pin: GPIO44
+  clock_speed: 16MHz
+  interface: spi2
+
+web_server:
+  port: 80
+
+external_components:
+  - source:
+      type: git
+      url: https://github.com/hzkincony/esphome-tuya-wifi-mcu
+      ref: v1.4.0
+    components:
+      - nx3l4051
+      - nx3l4051_max31865
+
+  - source:
+      type: git
+      url: https://github.com/hzkincony/esphome-tuya-wifi-mcu
+      ref: feat/esp-idf-support
+
+i2c:
+  sda: GPIO8
+  scl: GPIO18
+  frequency: 100kHz
+  scan: true
+
+pcf8574:
+  - id: co16_relay_hub
+    address: 0x22
+    pcf8575: true
+
+xl9535:
+  - id: co16_input_hub
+    address: 0x24
+
+ads1115:
+  - id: co16_adc_01_04
+    address: 0x48
+  - id: co16_adc_05_08
+    address: 0x49
+  - id: co16_adc_09_12
+    address: 0x4B
+  - id: co16_adc_13_16
+    address: 0x4A
+
+nx3l4051:
+  - id: co16_pt100_mux
+    pin_s1: GPIO7
+    pin_s2: GPIO21
+    pin_s3: LOW
+    delay: 20ms
+
+globals:
+  - id: co16_pt100_channel
+    type: uint8_t
+    restore_value: false
+    initial_value: "0"
+
+uart:
+  - id: uart_1
+    baud_rate: 9600
+    debug:
+      direction: BOTH
+      dummy_receiver: true
+      after:
+        timeout: 10ms
+    tx_pin: GPIO39
+    rx_pin: GPIO38
+
+  - id: tuya_mcu_uart
+    tx_pin: GPIO16
+    rx_pin: GPIO17
+    baud_rate: 9600
+
+tuya_wifi_mcu:
+  product_id: 8svouhd9lziyz5py
+  uart_id: tuya_mcu_uart
+  wifi_control_mode: module
+  wifi_reset_pin: 28
+  wifi_led_pin: 16
+
+switch:
+  - platform: gpio
+    name: "CO16 Output 01"
+    id: co16_output_01
+    restore_mode: ALWAYS_OFF
+    pin:
+      pcf8574: co16_relay_hub
+      number: 0
+      mode: OUTPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-output1-tuya
+    dp_id: 1
+    internal: true
+    bind_switch_id: "co16_output_01"
+
+  - platform: gpio
+    name: "CO16 Output 02"
+    id: co16_output_02
+    restore_mode: ALWAYS_OFF
+    pin:
+      pcf8574: co16_relay_hub
+      number: 1
+      mode: OUTPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-output2-tuya
+    dp_id: 2
+    internal: true
+    bind_switch_id: "co16_output_02"
+
+  - platform: gpio
+    name: "CO16 Output 03"
+    id: co16_output_03
+    restore_mode: ALWAYS_OFF
+    pin:
+      pcf8574: co16_relay_hub
+      number: 2
+      mode: OUTPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-output3-tuya
+    dp_id: 3
+    internal: true
+    bind_switch_id: "co16_output_03"
+
+  - platform: gpio
+    name: "CO16 Output 04"
+    id: co16_output_04
+    restore_mode: ALWAYS_OFF
+    pin:
+      pcf8574: co16_relay_hub
+      number: 3
+      mode: OUTPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-output4-tuya
+    dp_id: 4
+    internal: true
+    bind_switch_id: "co16_output_04"
+
+  - platform: gpio
+    name: "CO16 Output 05"
+    id: co16_output_05
+    restore_mode: ALWAYS_OFF
+    pin:
+      pcf8574: co16_relay_hub
+      number: 4
+      mode: OUTPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-output5-tuya
+    dp_id: 5
+    internal: true
+    bind_switch_id: "co16_output_05"
+
+  - platform: gpio
+    name: "CO16 Output 06"
+    id: co16_output_06
+    restore_mode: ALWAYS_OFF
+    pin:
+      pcf8574: co16_relay_hub
+      number: 5
+      mode: OUTPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-output6-tuya
+    dp_id: 6
+    internal: true
+    bind_switch_id: "co16_output_06"
+
+  - platform: gpio
+    name: "CO16 Output 07"
+    id: co16_output_07
+    restore_mode: ALWAYS_OFF
+    pin:
+      pcf8574: co16_relay_hub
+      number: 6
+      mode: OUTPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-output7-tuya
+    dp_id: 101
+    internal: true
+    bind_switch_id: "co16_output_07"
+
+  - platform: gpio
+    name: "CO16 Output 08"
+    id: co16_output_08
+    restore_mode: ALWAYS_OFF
+    pin:
+      pcf8574: co16_relay_hub
+      number: 7
+      mode: OUTPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-output8-tuya
+    dp_id: 102
+    internal: true
+    bind_switch_id: "co16_output_08"
+
+  - platform: gpio
+    name: "CO16 Output 09"
+    id: co16_output_09
+    restore_mode: ALWAYS_OFF
+    pin:
+      pcf8574: co16_relay_hub
+      number: 8
+      mode: OUTPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-output9-tuya
+    dp_id: 103
+    internal: true
+    bind_switch_id: "co16_output_09"
+
+  - platform: gpio
+    name: "CO16 Output 10"
+    id: co16_output_10
+    restore_mode: ALWAYS_OFF
+    pin:
+      pcf8574: co16_relay_hub
+      number: 9
+      mode: OUTPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-output10-tuya
+    dp_id: 104
+    internal: true
+    bind_switch_id: "co16_output_10"
+
+  - platform: gpio
+    name: "CO16 Output 11"
+    id: co16_output_11
+    restore_mode: ALWAYS_OFF
+    pin:
+      pcf8574: co16_relay_hub
+      number: 10
+      mode: OUTPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-output11-tuya
+    dp_id: 105
+    internal: true
+    bind_switch_id: "co16_output_11"
+
+  - platform: gpio
+    name: "CO16 Output 12"
+    id: co16_output_12
+    restore_mode: ALWAYS_OFF
+    pin:
+      pcf8574: co16_relay_hub
+      number: 11
+      mode: OUTPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-output12-tuya
+    dp_id: 106
+    internal: true
+    bind_switch_id: "co16_output_12"
+
+  - platform: gpio
+    name: "CO16 Output 13"
+    id: co16_output_13
+    restore_mode: ALWAYS_OFF
+    pin:
+      pcf8574: co16_relay_hub
+      number: 12
+      mode: OUTPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-output13-tuya
+    dp_id: 107
+    internal: true
+    bind_switch_id: "co16_output_13"
+
+  - platform: gpio
+    name: "CO16 Output 14"
+    id: co16_output_14
+    restore_mode: ALWAYS_OFF
+    pin:
+      pcf8574: co16_relay_hub
+      number: 13
+      mode: OUTPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-output14-tuya
+    dp_id: 108
+    internal: true
+    bind_switch_id: "co16_output_14"
+
+  - platform: gpio
+    name: "CO16 Output 15"
+    id: co16_output_15
+    restore_mode: ALWAYS_OFF
+    pin:
+      pcf8574: co16_relay_hub
+      number: 14
+      mode: OUTPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-output15-tuya
+    dp_id: 109
+    internal: true
+    bind_switch_id: "co16_output_15"
+
+  - platform: gpio
+    name: "CO16 Output 16"
+    id: co16_output_16
+    restore_mode: ALWAYS_OFF
+    pin:
+      pcf8574: co16_relay_hub
+      number: 15
+      mode: OUTPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-output16-tuya
+    dp_id: 110
+    internal: true
+    bind_switch_id: "co16_output_16"
+
+
+binary_sensor:
+  - platform: gpio
+    name: "CO16 Input 01"
+    id: co16_input_01
+    pin:
+      xl9535: co16_input_hub
+      number: 0
+      mode: INPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-input1-tuya
+    dp_id: 111
+    bind_binary_sensor_id: co16_input_01
+    internal: true
+
+  - platform: gpio
+    name: "CO16 Input 02"
+    id: co16_input_02
+    pin:
+      xl9535: co16_input_hub
+      number: 1
+      mode: INPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-input2-tuya
+    dp_id: 112
+    bind_binary_sensor_id: co16_input_02
+    internal: true
+
+  - platform: gpio
+    name: "CO16 Input 03"
+    id: co16_input_03
+    pin:
+      xl9535: co16_input_hub
+      number: 2
+      mode: INPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-input3-tuya
+    dp_id: 113
+    bind_binary_sensor_id: co16_input_03
+    internal: true
+
+  - platform: gpio
+    name: "CO16 Input 04"
+    id: co16_input_04
+    pin:
+      xl9535: co16_input_hub
+      number: 3
+      mode: INPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-input4-tuya
+    dp_id: 114
+    bind_binary_sensor_id: co16_input_04
+    internal: true
+
+  - platform: gpio
+    name: "CO16 Input 05"
+    id: co16_input_05
+    pin:
+      xl9535: co16_input_hub
+      number: 4
+      mode: INPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-input5-tuya
+    dp_id: 115
+    bind_binary_sensor_id: co16_input_05
+    internal: true
+
+  - platform: gpio
+    name: "CO16 Input 06"
+    id: co16_input_06
+    pin:
+      xl9535: co16_input_hub
+      number: 5
+      mode: INPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-input6-tuya
+    dp_id: 116
+    bind_binary_sensor_id: co16_input_06
+    internal: true
+
+  - platform: gpio
+    name: "CO16 Input 07"
+    id: co16_input_07
+    pin:
+      xl9535: co16_input_hub
+      number: 6
+      mode: INPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-input7-tuya
+    dp_id: 117
+    bind_binary_sensor_id: co16_input_07
+    internal: true
+
+  - platform: gpio
+    name: "CO16 Input 08"
+    id: co16_input_08
+    pin:
+      xl9535: co16_input_hub
+      number: 7
+      mode: INPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-input8-tuya
+    dp_id: 118
+    bind_binary_sensor_id: co16_input_08
+    internal: true
+
+  - platform: gpio
+    name: "CO16 Input 09"
+    id: co16_input_09
+    pin:
+      xl9535: co16_input_hub
+      number: 10
+      mode: INPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-input9-tuya
+    dp_id: 119
+    bind_binary_sensor_id: co16_input_09
+    internal: true
+
+  - platform: gpio
+    name: "CO16 Input 10"
+    id: co16_input_10
+    pin:
+      xl9535: co16_input_hub
+      number: 11
+      mode: INPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-input10-tuya
+    dp_id: 120
+    bind_binary_sensor_id: co16_input_10
+    internal: true
+
+  - platform: gpio
+    name: "CO16 Input 11"
+    id: co16_input_11
+    pin:
+      xl9535: co16_input_hub
+      number: 12
+      mode: INPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-input11-tuya
+    dp_id: 121
+    bind_binary_sensor_id: co16_input_11
+    internal: true
+
+  - platform: gpio
+    name: "CO16 Input 12"
+    id: co16_input_12
+    pin:
+      xl9535: co16_input_hub
+      number: 13
+      mode: INPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-input12-tuya
+    dp_id: 122
+    bind_binary_sensor_id: co16_input_12
+    internal: true
+
+  - platform: gpio
+    name: "CO16 Input 13"
+    id: co16_input_13
+    pin:
+      xl9535: co16_input_hub
+      number: 14
+      mode: INPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-input13-tuya
+    dp_id: 123
+    bind_binary_sensor_id: co16_input_13
+    internal: true
+
+  - platform: gpio
+    name: "CO16 Input 14"
+    id: co16_input_14
+    pin:
+      xl9535: co16_input_hub
+      number: 15
+      mode: INPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-input14-tuya
+    dp_id: 124
+    bind_binary_sensor_id: co16_input_14
+    internal: true
+
+  - platform: gpio
+    name: "CO16 Input 15"
+    id: co16_input_15
+    pin:
+      xl9535: co16_input_hub
+      number: 16
+      mode: INPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-input15-tuya
+    dp_id: 125
+    bind_binary_sensor_id: co16_input_15
+    internal: true
+
+  - platform: gpio
+    name: "CO16 Input 16"
+    id: co16_input_16
+    pin:
+      xl9535: co16_input_hub
+      number: 17
+      mode: INPUT
+      inverted: true
+  - platform: tuya_wifi_mcu
+    name: co16-input16-tuya
+    dp_id: 126
+    bind_binary_sensor_id: co16_input_16
+    internal: true
+
+
+sensor:
+  - platform: ads1115
+    ads1115_id: co16_adc_01_04
+    multiplexer: A0_GND
+    gain: 4.096
+    name: "CO16 Analog Input 01"
+    id: co16_analog_input_01
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: 5s
+    filters:
+      - lambda: 'return x <= 0.0025f ? 0.0f : x;'
+      - multiply: 5.16696
+      - clamp:
+          min_value: 0.0
+          max_value: 10.0
+  - platform: ads1115
+    ads1115_id: co16_adc_01_04
+    multiplexer: A1_GND
+    gain: 4.096
+    name: "CO16 Analog Input 02"
+    id: co16_analog_input_02
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: 5s
+    filters:
+      - lambda: 'return x <= 0.0025f ? 0.0f : x;'
+      - multiply: 5.16696
+      - clamp:
+          min_value: 0.0
+          max_value: 10.0
+  - platform: ads1115
+    ads1115_id: co16_adc_01_04
+    multiplexer: A2_GND
+    gain: 4.096
+    name: "CO16 Analog Input 03"
+    id: co16_analog_input_03
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: 5s
+    filters:
+      - lambda: 'return x <= 0.0025f ? 0.0f : x;'
+      - multiply: 5.16696
+      - clamp:
+          min_value: 0.0
+          max_value: 10.0
+  - platform: ads1115
+    ads1115_id: co16_adc_01_04
+    multiplexer: A3_GND
+    gain: 4.096
+    name: "CO16 Analog Input 04"
+    id: co16_analog_input_04
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: 5s
+    filters:
+      - lambda: 'return x <= 0.0025f ? 0.0f : x;'
+      - multiply: 5.16696
+      - clamp:
+          min_value: 0.0
+          max_value: 10.0
+  - platform: ads1115
+    ads1115_id: co16_adc_05_08
+    multiplexer: A0_GND
+    gain: 4.096
+    name: "CO16 Analog Input 05"
+    id: co16_analog_input_05
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: 5s
+    filters:
+      - lambda: 'return x <= 0.0025f ? 0.0f : x;'
+      - multiply: 5.16696
+      - clamp:
+          min_value: 0.0
+          max_value: 10.0
+  - platform: ads1115
+    ads1115_id: co16_adc_05_08
+    multiplexer: A1_GND
+    gain: 4.096
+    name: "CO16 Analog Input 06"
+    id: co16_analog_input_06
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: 5s
+    filters:
+      - lambda: 'return x <= 0.0025f ? 0.0f : x;'
+      - multiply: 5.16696
+      - clamp:
+          min_value: 0.0
+          max_value: 10.0
+  - platform: ads1115
+    ads1115_id: co16_adc_05_08
+    multiplexer: A2_GND
+    gain: 4.096
+    name: "CO16 Analog Input 07"
+    id: co16_analog_input_07
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: 5s
+    filters:
+      - lambda: 'return x <= 0.0025f ? 0.0f : x;'
+      - multiply: 5.16696
+      - clamp:
+          min_value: 0.0
+          max_value: 10.0
+  - platform: ads1115
+    ads1115_id: co16_adc_05_08
+    multiplexer: A3_GND
+    gain: 4.096
+    name: "CO16 Analog Input 08"
+    id: co16_analog_input_08
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: 5s
+    filters:
+      - lambda: 'return x <= 0.0025f ? 0.0f : x;'
+      - multiply: 5.16696
+      - clamp:
+          min_value: 0.0
+          max_value: 10.0
+  - platform: ads1115
+    ads1115_id: co16_adc_09_12
+    multiplexer: A0_GND
+    gain: 4.096
+    name: "CO16 Analog Input 09"
+    id: co16_analog_input_09
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: 5s
+    filters:
+      - lambda: 'return x <= 0.0025f ? 0.0f : x;'
+      - multiply: 5.16696
+      - clamp:
+          min_value: 0.0
+          max_value: 10.0
+  - platform: ads1115
+    ads1115_id: co16_adc_09_12
+    multiplexer: A1_GND
+    gain: 4.096
+    name: "CO16 Analog Input 10"
+    id: co16_analog_input_10
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: 5s
+    filters:
+      - lambda: 'return x <= 0.0025f ? 0.0f : x;'
+      - multiply: 5.16696
+      - clamp:
+          min_value: 0.0
+          max_value: 10.0
+  - platform: ads1115
+    ads1115_id: co16_adc_09_12
+    multiplexer: A2_GND
+    gain: 4.096
+    name: "CO16 Analog Input 11"
+    id: co16_analog_input_11
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: 5s
+    filters:
+      - lambda: 'return x <= 0.0025f ? 0.0f : x;'
+      - multiply: 5.16696
+      - clamp:
+          min_value: 0.0
+          max_value: 10.0
+  - platform: ads1115
+    ads1115_id: co16_adc_09_12
+    multiplexer: A3_GND
+    gain: 4.096
+    name: "CO16 Analog Input 12"
+    id: co16_analog_input_12
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: 5s
+    filters:
+      - lambda: 'return x <= 0.0025f ? 0.0f : x;'
+      - multiply: 5.16696
+      - clamp:
+          min_value: 0.0
+          max_value: 10.0
+  - platform: ads1115
+    ads1115_id: co16_adc_13_16
+    multiplexer: A0_GND
+    gain: 4.096
+    name: "CO16 Analog Input 13"
+    id: co16_analog_input_13
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: 5s
+    filters:
+      - lambda: 'return x <= 0.0025f ? 0.0f : x;'
+      - multiply: 5.16696
+      - clamp:
+          min_value: 0.0
+          max_value: 10.0
+  - platform: ads1115
+    ads1115_id: co16_adc_13_16
+    multiplexer: A1_GND
+    gain: 4.096
+    name: "CO16 Analog Input 14"
+    id: co16_analog_input_14
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: 5s
+    filters:
+      - lambda: 'return x <= 0.0025f ? 0.0f : x;'
+      - multiply: 5.16696
+      - clamp:
+          min_value: 0.0
+          max_value: 10.0
+  - platform: ads1115
+    ads1115_id: co16_adc_13_16
+    multiplexer: A2_GND
+    gain: 4.096
+    name: "CO16 Analog Input 15"
+    id: co16_analog_input_15
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: 5s
+    filters:
+      - lambda: 'return x <= 0.0025f ? 0.0f : x;'
+      - multiply: 5.16696
+      - clamp:
+          min_value: 0.0
+          max_value: 10.0
+  - platform: ads1115
+    ads1115_id: co16_adc_13_16
+    multiplexer: A3_GND
+    gain: 4.096
+    name: "CO16 Analog Input 16"
+    id: co16_analog_input_16
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: 5s
+    filters:
+      - lambda: 'return x <= 0.0025f ? 0.0f : x;'
+      - multiply: 5.16696
+      - clamp:
+          min_value: 0.0
+          max_value: 10.0
+
+  - platform: nx3l4051_max31865
+    id: co16_pt100_reader
+    mux_id: co16_pt100_mux
+    internal: true
+    clk_pin: GPIO11
+    mosi_pin: GPIO10
+    miso_pin: GPIO12
+    cs_pin: GPIO14
+    reference_resistance: 400 ohm
+    rtd_nominal_resistance: 100 ohm
+    rtd_wires: 3
+    mains_filter: 50 Hz
+    update_interval: never
+
+  - platform: template
+    name: "CO16 PT100 01"
+    id: co16_pt100_01
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: never
+  - platform: template
+    name: "CO16 PT100 02"
+    id: co16_pt100_02
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: never
+  - platform: template
+    name: "CO16 PT100 03"
+    id: co16_pt100_03
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: never
+  - platform: template
+    name: "CO16 PT100 04"
+    id: co16_pt100_04
+    unit_of_measurement: "°C"
+    device_class: temperature
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: never
+
+interval:
+  - interval: 10s
+    then:
+      - repeat:
+          count: 4
+          then:
+            - nx3l4051.select:
+                id: co16_pt100_mux
+                channel: !lambda return id(co16_pt100_channel);
+            - component.update: co16_pt100_reader
+            - delay: 70ms
+            - lambda: |-
+                const float value = id(co16_pt100_reader).state;
+                switch (id(co16_pt100_channel)) {
+                  case 0:
+                    id(co16_pt100_01).publish_state(value);
+                    break;
+                  case 1:
+                    id(co16_pt100_02).publish_state(value);
+                    break;
+                  case 2:
+                    id(co16_pt100_03).publish_state(value);
+                    break;
+                  default:
+                    id(co16_pt100_04).publish_state(value);
+                    break;
+                }
+                id(co16_pt100_channel) = (id(co16_pt100_channel) + 1) % 4;
