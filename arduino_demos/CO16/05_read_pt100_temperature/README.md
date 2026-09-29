@@ -37,12 +37,12 @@ The code selects each PT100 channel, reads the raw RTD value, calculates resista
 
 ## Expected Behavior
 - On startup, the Serial Monitor (115200 baud) displays:
-```
+```cpp
 FeedCurrent CO16 four-channel PT100 example
 MUX S3=LOW S2=21 S1=7; SPI SCLK=11 MOSI=10 MISO=12 CS=14
 ```
 - Every second, the code cycles through all 4 channels and prints for each:
-```
+```cpp
 CH1 raw=12345 resistance=150.123 ohm temperature=25.67 C fault=0x0
 ```
 - If a fault is detected, the fault code and description are printed (e.g., `RTD_HIGH_THRESHOLD`, `REFIN_LOW_OR_FORCE_OPEN`).

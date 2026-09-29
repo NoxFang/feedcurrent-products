@@ -30,7 +30,7 @@ Insert a micro SD card formatted as FAT32. The CO16 board includes a built‑in 
 
 ## Expected Output (Serial Monitor at 115200 baud)
 After inserting a formatted SD card and resetting the board, you will see output similar to:
-```
+```cpp
 SD Card Type: SDHC
 SD Card Size: 3817MB
 Deleting file: /hello.txt

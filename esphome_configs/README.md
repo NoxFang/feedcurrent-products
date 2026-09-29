@@ -4,7 +4,7 @@ This directory contains ESPHome YAML configuration files for various Kincony sma
 
 ## Structure
 
-- Each product is organized in a separate subfolder named after the model (e.g., `B4/`, `F8/`, `DM16/`).
+- Each product is organized in a separate subfolder named after the model (e.g., `B4/`, `F8/`, `DM16/`, `CO16/`).
 - Inside each folder you will find:
   - One or more `.yaml` configuration files (e.g., `B4_esphome_with_tuya.yaml`, `B4_esphome_without_tuya.yaml`).
   - A `README.md` describing hardware features, pin assignments, and usage notes.
@@ -14,6 +14,7 @@ This directory contains ESPHome YAML configuration files for various Kincony sma
 ### B Series (Relay / MOSFET Controllers)
 | Model | Subfolder | Description |
 |-------|-----------|-------------|
+| B2 | `B2/` | 2‑channel relay controller with 2 inputs, ADS1115, Ethernet |
 | B4 | `B4/` | 8‑channel relay controller with 4 inputs, ADS1115, 1‑Wire |
 | B4M | `B4M/` | 8‑channel relay controller (variant) |
 | B8 | `B8/` | 8‑channel relay controller with 8 inputs, PCF8575, Ethernet |
@@ -54,6 +55,11 @@ This directory contains ESPHome YAML configuration files for various Kincony sma
 | T32M | `T32M/` | 32‑channel relay controller with 32 inputs, quad PCF8575, 1‑Wire, Ethernet |
 | T64M | `T64M/` | 64‑channel relay controller with 64 inputs, octuple PCF8575, two I2C buses |
 | T128M | `T128M/` | 128‑channel relay controller with 128 inputs, 16× PCF8575, two I2C buses |
+
+### CO Series (Multi‑Function Controllers)
+| Model | Subfolder | Description |
+|-------|-----------|-------------|
+| CO16 | `CO16/` | 16‑channel relay controller with 16 digital inputs, 16 analog inputs (4× ADS1115), 4× PT100 (MAX31865), Ethernet, ST7789 TFT, SD card, DS3231 RTC |
 
 ### Special / Industrial Controllers
 | Model | Subfolder | Description |

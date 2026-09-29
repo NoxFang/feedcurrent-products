@@ -4,7 +4,7 @@ This directory contains the ESP32-S3 I/O pin definitions for various Kincony con
 
 ## Structure
 
-- Each product is organized in a separate subfolder named after the model (e.g., `B4/`, `B8/`).
+- Each product is organized in a separate subfolder named after the model (e.g., `B4/`, `B8/`, `CO16/`).
 - Inside each folder, you will find a Markdown file named `{Model}_pin_definition.md` (e.g., `B4/B4_pin_definition.md`).
 
 ## Available Models
@@ -13,13 +13,15 @@ This directory contains the ESP32-S3 I/O pin definitions for various Kincony con
 
 | Model | Description | Pin Definition File |
 |-------|-------------|---------------------|
-| **B4** | 8‑channel relay controller with 4 inputs, ADS1115, 1‑Wire | [`B4/B4_pin_definition.md`](B4/B4_pin_definition.md) |
-| **B4M** | 8‑channel relay controller (variant) | [`B4M/B4M_pin_definition.md`](B4M/B4M_pin_definition.md) |
+| **B2** | 2‑channel relay controller with 2 inputs, ADS1115, Ethernet | [`B2/B2_pin_definition.md`](B2/B2_pin_definition.md) |
+| **B4** | 4‑channel relay controller with 4 inputs, ADS1115, 1‑Wire | [`B4/B4_pin_definition.md`](B4/B4_pin_definition.md) |
+| **B4M** | 4‑channel MOSFET controller with 4 inputs, ADS1115, 1‑Wire | [`B4M/B4M_pin_definition.md`](B4M/B4M_pin_definition.md) |
 | **B8** | 8‑channel relay controller with 8 inputs, PCF8575, Ethernet | [`B8/B8_pin_definition.md`](B8/B8_pin_definition.md) |
 | **B8M** | 8‑channel MOSFET controller with 8 inputs, PCF8575, Ethernet | [`B8M/B8M_pin_definition.md`](B8M/B8M_pin_definition.md) |
 | **B16** | 16‑channel relay controller with 16 inputs, dual PCF8575, Ethernet | [`B16/B16_pin_definition.md`](B16/B16_pin_definition.md) |
+| **B16M** | 16‑channel MOSFET controller with 16 inputs, dual PCF8575, Ethernet | [`B16M/B16M_pin_definition.md`](B16M/B16M_pin_definition.md) |
 | **B24** | 24‑channel relay controller with 24 inputs, triple PCF8575, Ethernet | [`B24/B24_pin_definition.md`](B24/B24_pin_definition.md) |
-| **B24M** | 24‑channel relay controller (variant) | [`B24M/B24M_pin_definition.md`](B24M/B24M_pin_definition.md) |
+| **B24M** | 24‑channel MOSFET controller with 24 inputs, triple PCF8575, Ethernet | [`B24M/B24M_pin_definition.md`](B24M/B24M_pin_definition.md) |
 
 ### F Series (Relay Controllers with Digital Inputs)
 
@@ -46,6 +48,8 @@ This directory contains the ESP32-S3 I/O pin definitions for various Kincony con
 |-------|-------------|---------------------|
 | **N10** | 10‑channel energy monitor with ARM CPU, Ethernet, LoRa, SD card | [`N10/N10_pin_definition.md`](N10/N10_pin_definition.md) |
 | **N20** | 20‑channel energy monitor with dual BL0910 chips, Ethernet, LoRa, SD card | [`N20/N20_pin_definition.md`](N20/N20_pin_definition.md) |
+| **N30** | 30‑channel energy monitor with three BL0910 chips, Ethernet, LoRa, SD card | [`N30/N30_pin_definition.md`](N30/N30_pin_definition.md) |
+| **N60** | 60‑channel energy monitor with six BL0910 chips, Ethernet, LoRa, SD card | [`N60/N60_pin_definition.md`](N60/N60_pin_definition.md) |
 
 ### DM Series (DAC / Analog Output Controllers)
 
@@ -55,6 +59,12 @@ This directory contains the ESP32-S3 I/O pin definitions for various Kincony con
 | **DM8** | 8‑channel DAC controller with digital inputs, 1‑Wire, Ethernet | [`DM8/DM8_pin_definition.md`](DM8/DM8_pin_definition.md) |
 | **DM16** | 16‑channel DAC controller with 16 inputs, 1‑Wire, Ethernet | [`DM16/DM16_pin_definition.md`](DM16/DM16_pin_definition.md) |
 | **DM32** | 32‑channel DAC controller with 32 inputs, 1‑Wire, Ethernet | [`DM32/DM32_pin_definition.md`](DM32/DM32_pin_definition.md) |
+
+### CO Series (Multi‑Function Controllers)
+
+| Model | Description | Pin Definition File |
+|-------|-------------|---------------------|
+| **CO16** | 16‑channel relay controller with 16 digital inputs, 16 analog inputs (4× ADS1115), 4× PT100 (MAX31865), Ethernet, ST7789 TFT, SD card, DS3231 RTC | [`CO16/CO16_pin_definition.md`](CO16/CO16_pin_definition.md) |
 
 ### Special / Industrial Controllers
 

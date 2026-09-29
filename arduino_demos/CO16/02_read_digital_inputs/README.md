@@ -30,7 +30,7 @@ The combined 16‑bit input state is printed as a binary value to the Serial Mon
 ## Expected Behavior
 - On startup, the Serial Monitor (115200 baud) begins printing after a 2‑second delay.
 - Every 1 second, a line is printed:
-```
+```cpp
 1-16 input states: 0000000000000000
 ```
 The binary value represents the state of all 16 inputs.  

@@ -45,12 +45,15 @@ Only channels with an input voltage greater than **0.5 V** are printed.
 ## Expected Behavior
 - On startup, the Serial Monitor (115200 baud) prints a header and configuration summary.
 - Every 1 second, the code reads all 16 channels. For any channel whose calibrated voltage exceeds 0.5 V, a line is printed:
-```
+```cpp
 CH1: 2.34 V
 CH5: 1.08 V
 ```
 - If an ADS1115 module is not detected, an error message is printed, e.g.:
-```ADS1115-1 (0x48) Disconnected!
+```cpp
+ADS1115-1 (0x48) Disconnected!
+```
+
 
 ## Calibration Details
 The code applies the same calibration as the ESPHome configuration:
@@ -60,7 +63,7 @@ The code applies the same calibration as the ESPHome configuration:
 - **Clamp**: final voltage is limited to 0–10 V.
 
 This means the actual input voltage is calculated as:
-```
+```cpp
 V_in = clamp( (V_adc ≤ 0.0025 ? 0 : V_adc) × 5.16696 , 0, 10 )
 ```
 

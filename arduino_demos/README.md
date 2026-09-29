@@ -30,6 +30,7 @@ This directory contains Arduino example sketches for various FeedCurrent control
 - `T128M/`  – 128‑channel relay & input board (dual I2C buses)
 
 ### B Series – MOSFET & Relay Boards
+- `B2/`     – 2‑channel relay board
 - `B4/`     – 4‑channel relay board (functionally identical to B4M)
 - `B4M/`    – 4‑channel MOSFET board
 - `B8/`     – 8‑channel relay board (functionally identical to B8M)
@@ -38,6 +39,9 @@ This directory contains Arduino example sketches for various FeedCurrent control
 - `B16M/`   – 16‑channel MOSFET board
 - `B24/`    – 24‑channel relay board (functionally identical to B24M)
 - `B24M/`   – 24‑channel MOSFET board
+
+### CO Series – Multi‑Function Controllers
+- `CO16/`   – 16‑channel relay & input controller with 16 analog inputs, 4× PT100, Ethernet, ST7789 TFT, SD card, RTC
 
 ### Special / Industrial
 - `G1/`        – Gateway controller

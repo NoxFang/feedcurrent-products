@@ -39,7 +39,7 @@ After uploading, open the Serial Monitor at **115200 baud**. You can use the fol
 
 ## Expected Output
 On startup, the current time is printed:
-```
+```cpp
 Current time is: 2024-01-01 00:00:10
 ```
 After sending `current time`, the same format is displayed.

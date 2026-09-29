@@ -44,14 +44,14 @@ If your network uses a different subnet, modify the `ip`, `gateway`, `subnet`, a
 
 ## Expected Behavior
 1. After uploading, open the Serial Monitor (115200 baud). You should see:
-```
+```cpp
 IP Address: 192.168.3.55
 ```
 2. The server starts listening on port 4196.
 3. From any device on the same network, connect to the CO16 using a TCP client (e.g., `telnet 192.168.3.55 4196`).
 4. Type any text; the server will echo it back.
 5. When the client disconnects, the Serial Monitor prints:
-```
+```cpp
 New client connected
 Client disconnected
 ```
