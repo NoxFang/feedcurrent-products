@@ -34,6 +34,11 @@ feedcurrent-products/
 - B4, B4M, B8, B8M, B16, B16M, B24, B24M  
   *Relay and MOSFET variants with same pin layouts.*
 
+### Pi5 Series – Raspberry Pi CM5 Controllers
+- Pi5M8, Pi5M16, Pi5M32 – MOSFET output controllers with 8/16/32 channels
+- Pi5R8, Pi5R16, Pi5R32 – Relay output controllers with 8/16/32 channels
+  *Powered by Raspberry Pi Compute Module 5 (CM5), DIN rail mount, Gigabit Ethernet, RS232/RS485, optocoupler‑isolated inputs, PWM outputs, analog inputs, M.2 PCIe expansion, SSD1306 OLED display, Node‑RED support, and industrial aluminum enclosure.*
+
 ### Special / Industrial
 - G1 (Gateway), TA (Thermostat Adapter), AIO Hybrid  
   *Specialised controllers with integrated peripherals (RF433, Zigbee, IR, DAC, etc.).*
@@ -54,6 +59,12 @@ Each product has numbered example folders (01 to up to 13) with:
 - `precompiled/` – ready‑to‑flash `.bin` firmware
 - `README.md` – detailed explanation of the example
 
+### Node‑RED Flows (`node_red_flows/`)
+Pre‑built Node‑RED flows for the Pi5 series and other supported products.
+- Subdirectories are named after the product (e.g., `Pi5M8/`, `Pi5R16/`).
+- Each folder contains `.json` flow files that can be imported directly into Node‑RED.
+- Ideal for rapid prototyping and visual automation design.
+
 ### KCS Firmware (`kcs_firmware/`)
 Pre‑compiled KCS system firmware for each product model.  
 - Subdirectories are named after the product (e.g., `F16/`, `T64M/`).
@@ -67,6 +78,7 @@ Pre‑compiled KCS system firmware for each product model.
 3. **Choose** either:
    - **ESPHome** for Home Assistant integration
    - **Arduino** for custom programming
+   - **Node‑RED** for visual automation (Pi5 series and compatible models)
    - **KCS firmware** for the complete production‑ready system
 4. **Flash** the appropriate firmware (precompiled binaries at address `0x0`) or compile from source.
 
@@ -79,13 +91,13 @@ Pre‑compiled KCS system firmware for each product model.
 ## Contributing
 
 When adding a new product:
-1. Create a subfolder under `pin_definitions/`, `esphome_configs/`, `arduino_demos/`, and `kcs_firmware/`.
+1. Create a subfolder under `pin_definitions/`, `esphome_configs/`, `arduino_demos/`, `node_red_flows/`, and `kcs_firmware/`.
 2. Follow the established naming and structure conventions.
 3. Provide clear English documentation.
 4. Reference the source forum threads (if applicable).
 
 ## Version History
-
+- **2026‑10‑08** – Added node_red_flows/ directory with Pi5M8, Pi5M16, Pi5M32, Pi5R8, Pi5R16, Pi5R32 flows; added corresponding pin_definitions/ entries for all Pi5 models.
 - **2026‑03‑26** – Added `kcs_firmware/` directory with KCS v3.24.2 firmware for all models.
 - **2026‑03‑25** – Added T16M, T32M, T64M, T128M, N10/N20/N30/N60, F24/F32, and all corresponding examples.
 - **2026‑03‑21** – Initial AIO Hybrid documentation included.
