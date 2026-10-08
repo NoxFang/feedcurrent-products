@@ -1,7 +1,7 @@
 # FeedCurrent Products – Software Resources
 
 This repository contains systematically organized software resources for FeedCurrent ESP32‑S3 based controllers.  
-Resources include **pin definitions**, **ESPHome YAML configurations**, **Arduino example sketches**, and **KCS firmware** for each product.
+Resources include **pin definitions**, **ESPHome YAML configurations**, **Arduino example sketches**, **Node‑RED flows**, and **KCS firmware** for each product.
 
 ## Repository Structure
 ```cpp
@@ -9,6 +9,7 @@ feedcurrent-products/
 ├── pin_definitions/ # GPIO pinout tables per product
 ├── esphome_configs/ # ESPHome YAML files (with/without Tuya)
 ├── arduino_demos/ # Arduino example sketches
+├── node_red_flows/ # Node‑RED flow examples per product
 └── kcs_firmware/ # KCS firmware binaries (per model)
 ```
 
@@ -97,7 +98,7 @@ When adding a new product:
 4. Reference the source forum threads (if applicable).
 
 ## Version History
-- **2026‑10‑08** – Added node_red_flows/ directory with Pi5M8, Pi5M16, Pi5M32, Pi5R8, Pi5R16, Pi5R32 flows; added corresponding pin_definitions/ entries for all Pi5 models.
+- **2026‑10‑08** – Added `node_red_flows/` directory with Pi5M8, Pi5M16, Pi5M32, Pi5R8, Pi5R16, Pi5R32 flows; added corresponding `pin_definitions/` entries for all Pi5 models.
 - **2026‑03‑26** – Added `kcs_firmware/` directory with KCS v3.24.2 firmware for all models.
 - **2026‑03‑25** – Added T16M, T32M, T64M, T128M, N10/N20/N30/N60, F24/F32, and all corresponding examples.
 - **2026‑03‑21** – Initial AIO Hybrid documentation included.
